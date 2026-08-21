@@ -1,0 +1,40 @@
+# 大象识别系统配置文件
+
+# 数据配置
+data:
+  image_size: 224
+  val_split: 0.2  # 验证集比例
+
+# 训练配置
+training:
+  batch_size: 32
+  num_epochs: 50
+  learning_rate: 0.001
+  weight_decay: 0.0001
+  num_workers: 4
+
+# 模型配置
+model:
+  backbone: 'resnet50'  # 可选: resnet50, resnet101, efficientnet_b0
+  pretrained: true
+  dropout: 0.5
+
+# 数据增强
+augmentation:
+  random_crop: true
+  horizontal_flip: true
+  rotation_degrees: 15
+  color_jitter:
+    brightness: 0.2
+    contrast: 0.2
+    saturation: 0.2
+
+# 保存路径
+paths:
+  model_save: 'best_elephant_model.pth'
+  class_names: 'class_names.json'
+  training_curves: 'training_curves.png'
+
+# 设备配置
+device:
+  use_cuda: true  # 如果有GPU则使用

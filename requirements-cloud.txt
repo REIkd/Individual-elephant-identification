@@ -1,0 +1,10 @@
+# Cloud server deps (ASCII only for Windows pip). Install PyTorch separately if needed.
+torch>=1.13.0
+torchvision>=0.14.0
+pillow>=9.0.0
+numpy>=1.22.0,<2.0.0
+opencv-python-headless>=4.8.0
+ultralytics>=8.0.0
+fastapi>=0.100.0
+uvicorn[standard]>=0.23.0
+python-multipart>=0.0.6

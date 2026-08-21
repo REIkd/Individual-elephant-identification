@@ -1,0 +1,17 @@
+[Unit]
+Description=Pi Cloud Elephant Client Watchdog
+After=network-online.target
+
+[Service]
+Type=simple
+WorkingDirectory=__DEPLOY_DIR__
+ExecStart=__DEPLOY_DIR__/pi_cloud_watchdog.sh
+Restart=always
+RestartSec=10
+StartLimitIntervalSec=0
+
+StandardOutput=journal
+StandardError=journal
+
+[Install]
+WantedBy=default.target

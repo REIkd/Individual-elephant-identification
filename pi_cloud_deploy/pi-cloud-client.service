@@ -1,0 +1,21 @@
+[Unit]
+Description=Pi Cloud Elephant Client
+After=network-online.target
+Wants=network-online.target
+
+[Service]
+Type=simple
+WorkingDirectory=__DEPLOY_DIR__
+ExecStart=__DEPLOY_DIR__/run_pi_cloud_client.sh --service
+Restart=always
+RestartSec=10
+StartLimitIntervalSec=0
+
+NoNewPrivileges=true
+PrivateTmp=true
+
+StandardOutput=journal
+StandardError=journal
+
+[Install]
+WantedBy=default.target

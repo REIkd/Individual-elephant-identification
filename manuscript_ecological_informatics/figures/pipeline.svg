@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="560" viewBox="0 0 1200 560" role="img" aria-label="Re-identification inference pipeline">
+  <defs>
+    <marker id="arrow" markerWidth="10" markerHeight="10" refX="9" refY="5" orient="auto">
+      <path d="M0,0 L10,5 L0,10 Z" fill="#2c3e50"/>
+    </marker>
+    <linearGradient id="bgGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#f7f9fb"/>
+      <stop offset="100%" stop-color="#eef3f7"/>
+    </linearGradient>
+    <filter id="shadow" x="-4%" y="-4%" width="108%" height="108%">
+      <feDropShadow dx="0" dy="2" stdDeviation="3" flood-color="#000000" flood-opacity="0.12"/>
+    </filter>
+    <style>
+      .title { font: 700 22px Arial, Helvetica, sans-serif; fill: #1a1a1a; }
+      .subtitle { font: 400 13px Arial, Helvetica, sans-serif; fill: #5a6570; }
+      .box-title { font: 700 14px Arial, Helvetica, sans-serif; fill: #ffffff; }
+      .box-text { font: 400 12px Arial, Helvetica, sans-serif; fill: #ffffff; }
+      .box-text-dark { font: 400 12px Arial, Helvetica, sans-serif; fill: #2d3748; }
+      .box-title-dark { font: 700 14px Arial, Helvetica, sans-serif; fill: #1a202c; }
+      .stage { font: 600 11px Arial, Helvetica, sans-serif; fill: #4a5568; letter-spacing: 0.04em; }
+      .note { font: italic 11px Arial, Helvetica, sans-serif; fill: #718096; }
+      .legend { font: 400 11px Arial, Helvetica, sans-serif; fill: #4a5568; }
+    </style>
+  </defs>
+
+  <rect x="0" y="0" width="1200" height="560" rx="12" fill="url(#bgGrad)" stroke="#d8e0e8" stroke-width="1"/>
+
+  <text x="600" y="42" text-anchor="middle" class="title">Fine-grained re-identification inference pipeline</text>
+  <text x="600" y="64" text-anchor="middle" class="subtitle">Detect, classify, stabilise (Configuration C checkpoint; 17-way closed set)</text>
+
+  <g filter="url(#shadow)">
+    <rect x="36" y="110" width="148" height="88" rx="10" fill="#4a5568"/>
+    <text x="110" y="142" text-anchor="middle" class="box-title">Input</text>
+    <text x="110" y="162" text-anchor="middle" class="box-text">Field photograph</text>
+    <text x="110" y="178" text-anchor="middle" class="box-text">or video frame</text>
+  </g>
+
+  <line x1="184" y1="154" x2="218" y2="154" stroke="#2c3e50" stroke-width="2.2" marker-end="url(#arrow)"/>
+
+  <g filter="url(#shadow)">
+    <rect x="220" y="110" width="168" height="88" rx="10" fill="#2b6cb0"/>
+    <text x="304" y="132" text-anchor="middle" class="stage" fill="#dbeafe">STAGE 1</text>
+    <text x="304" y="152" text-anchor="middle" class="box-title">Detection</text>
+    <text x="304" y="170" text-anchor="middle" class="box-text">YOLO (Ultralytics)</text>
+    <text x="304" y="186" text-anchor="middle" class="box-text">COCO elephant class</text>
+  </g>
+
+  <line x1="388" y1="154" x2="422" y2="154" stroke="#2c3e50" stroke-width="2.2" marker-end="url(#arrow)"/>
+
+  <g filter="url(#shadow)">
+    <rect x="424" y="110" width="168" height="88" rx="10" fill="#2c7a7b"/>
+    <text x="508" y="142" text-anchor="middle" class="box-title">Tracking</text>
+    <text x="508" y="162" text-anchor="middle" class="box-text">Multi-object tracker</text>
+    <text x="508" y="178" text-anchor="middle" class="box-text">Persistent track_id</text>
+  </g>
+
+  <line x1="592" y1="154" x2="626" y2="154" stroke="#2c3e50" stroke-width="2.2" marker-end="url(#arrow)"/>
+
+  <g filter="url(#shadow)">
+    <rect x="628" y="110" width="148" height="88" rx="10" fill="#6b7280"/>
+    <text x="702" y="142" text-anchor="middle" class="box-title">Crop</text>
+    <text x="702" y="162" text-anchor="middle" class="box-text">Padded detector</text>
+    <text x="702" y="178" text-anchor="middle" class="box-text">bounding-box region</text>
+  </g>
+
+  <line x1="776" y1="154" x2="810" y2="154" stroke="#2c3e50" stroke-width="2.2" marker-end="url(#arrow)"/>
+
+  <g filter="url(#shadow)">
+    <rect x="812" y="110" width="188" height="88" rx="10" fill="#805ad5"/>
+    <text x="906" y="132" text-anchor="middle" class="stage" fill="#ede9fe">STAGE 2</text>
+    <text x="906" y="152" text-anchor="middle" class="box-title">Classification</text>
+    <text x="906" y="170" text-anchor="middle" class="box-text">EfficientNet-V2-S</text>
+    <text x="906" y="186" text-anchor="middle" class="box-text">17 individual identities</text>
+  </g>
+
+  <path d="M906 198 L906 232" stroke="#2c3e50" stroke-width="2.2" fill="none" marker-end="url(#arrow)"/>
+
+  <g filter="url(#shadow)">
+    <rect x="764" y="234" width="284" height="92" rx="10" fill="#c05621"/>
+    <text x="906" y="262" text-anchor="middle" class="box-title">Track-level identity stabilisation</text>
+    <text x="906" y="282" text-anchor="middle" class="box-text">Per-track identity cache</text>
+    <text x="906" y="298" text-anchor="middle" class="box-text">Lock-after-confidence; intermittent classification</text>
+    <text x="906" y="314" text-anchor="middle" class="box-text">Mitigates label flicker across frames</text>
+  </g>
+
+  <path d="M508 198 L508 278 L764 278" stroke="#718096" stroke-width="1.8" stroke-dasharray="7 5" fill="none" marker-end="url(#arrow)"/>
+  <g filter="url(#shadow)">
+    <rect x="404" y="234" width="208" height="72" rx="10" fill="#ffffff" stroke="#a0aec0" stroke-width="1.5" stroke-dasharray="6 4"/>
+    <text x="508" y="258" text-anchor="middle" class="box-title-dark">Optional prior</text>
+    <text x="508" y="276" text-anchor="middle" class="box-text-dark">Candidate filtering</text>
+    <text x="508" y="292" text-anchor="middle" class="box-text-dark">allowed_elephants subset</text>
+  </g>
+  <text x="508" y="222" text-anchor="middle" class="note">when herd composition is known</text>
+
+  <path d="M906 326 L906 360" stroke="#2c3e50" stroke-width="2.2" fill="none" marker-end="url(#arrow)"/>
+
+  <g filter="url(#shadow)">
+    <rect x="734" y="362" width="344" height="88" rx="10" fill="#276749"/>
+    <text x="906" y="394" text-anchor="middle" class="box-title">Output</text>
+    <text x="906" y="414" text-anchor="middle" class="box-text">Stable individual labels per track_id</text>
+    <text x="906" y="430" text-anchor="middle" class="box-text">Annotated replay video / review media</text>
+  </g>
+
+  <g filter="url(#shadow)">
+    <rect x="36" y="234" width="320" height="130" rx="10" fill="#ffffff" stroke="#cbd5e0" stroke-width="1.5"/>
+    <text x="196" y="260" text-anchor="middle" class="box-title-dark">Trained model (Configuration C)</text>
+    <text x="196" y="282" text-anchor="middle" class="box-text-dark">Body + morphological feature-region</text>
+    <text x="196" y="298" text-anchor="middle" class="box-text-dark">supervision at training time</text>
+    <line x1="56" y1="308" x2="336" y2="308" stroke="#e2e8f0" stroke-width="1"/>
+    <text x="196" y="326" text-anchor="middle" class="box-text-dark">Validation: held-out body crops</text>
+    <text x="196" y="344" text-anchor="middle" class="box-text-dark">Deployment: detector-level crops</text>
+    <text x="196" y="358" text-anchor="middle" class="note">Improves field / YOLO-crop generalisation</text>
+  </g>
+
+  <path d="M356 280 L812 154" stroke="#805ad5" stroke-width="1.6" stroke-dasharray="6 5" fill="none" marker-end="url(#arrow)"/>
+  <text x="560" y="200" text-anchor="middle" font-family="Arial, Helvetica, sans-serif" font-size="12" font-weight="700" fill="#553c9a">model weights</text>
+
+  <rect x="36" y="472" width="1128" height="68" rx="8" fill="#edf2f7" stroke="#cbd5e0" stroke-width="1"/>
+  <text x="56" y="494" class="legend" font-weight="600">Optional asynchronous deployment:</text>
+  <text x="56" y="514" class="legend">PIR-triggered camera-trap clips, cloud upload, offline batch processing, annotated replay for post hoc review (no real-time streaming).</text>
+  <text x="56" y="532" class="legend">Supplementary to primary re-identification evaluation (Section: Optional deployment context).</text>
+
+  <line x1="880" y1="488" x2="910" y2="488" stroke="#2c3e50" stroke-width="2"/>
+  <text x="918" y="492" class="legend">Core inference flow</text>
+  <line x1="880" y1="512" x2="910" y2="512" stroke="#718096" stroke-width="1.8" stroke-dasharray="6 4"/>
+  <text x="918" y="516" class="legend">Optional module / context</text>
+</svg>
